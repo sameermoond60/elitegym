@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Fitness | Unleash Your Elite Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --neon-red: #ff0000;
+            --neon-red-glow: rgba(255, 0, 0, 0.7);
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        .contact-info a:hover {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red-glow);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Loader --- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+
+        .loader-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px solid transparent;
+            border-top-color: var(--neon-red);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 15px 5%;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-red);
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 7vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 700px;
+            letter-spacing: 1px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            padding: 18px 40px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 800;
+            font-family: 'Syncopate';
+            font-size: 0.75rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--neon-red);
+            color: white;
+            box-shadow: 0 10px 20px -10px var(--neon-red-glow);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px var(--neon-red-glow);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--text-white);
+            color: white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: black;
+        }
+
+        /* --- Facilities Section --- */
+        .section {
+            padding: 120px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--neon-red);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .facility-card {
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+
+        .facility-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.8s ease;
+            filter: grayscale(100%) brightness(0.6);
+        }
+
+        .facility-card:hover img {
+            filter: grayscale(0%) brightness(0.8);
+            transform: scale(1.1);
+        }
+
+        .facility-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            z-index: 2;
+        }
+
+        .facility-info h4 {
+            font-family: 'Syncopate';
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .facility-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .facility-card:hover::before {
+            border: 1px solid var(--neon-red);
+        }
+
+        /* --- Pricing --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            padding: 60px 40px;
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .price-card:hover {
+            border-color: var(--neon-red);
+            background: rgba(255, 0, 0, 0.02);
+        }
+
+        .price-card.featured {
+            border: 1px solid var(--neon-red);
+            position: relative;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--neon-red);
+            padding: 6px 20px;
+            font-size: 0.6rem;
+            font-family: 'Syncopate';
+            font-weight: 900;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--neon-red);
+            margin: 30px 0;
+            font-family: 'Syncopate';
+        }
+
+        /* --- Reveal --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            background: #000;
+            padding: 100px 10% 40px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--neon-red);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.8);
+        }
+
+        /* --- Trainers Section --- */
+        .trainer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .trainer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-red);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.2);
+        }
+
+        .trainer-img img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .trainer-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .trainer-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .trainer-info h3 {
+            margin-bottom: 15px;
+            color: var(--neon-red);
+        }
+
+        .trainer-info p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="logo">ELITE FITNESS</div>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#facilities">FACILITIES</a></li>
+            <li><a href="#plans">PRICING</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+        <a href="tel:07988834371" class="btn btn-primary" style="padding: 10px 20px;">CALL NOW</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1 class="reveal">UNLEASH YOUR<br><span style="color: var(--neon-red);">ELITE</span> VERSION</h1>
+        <p class="reveal">Elite Fitness Sirsa – High-Performance Environment for Champions.</p>
+        <div class="cta-group reveal">
+            <a href="tel:07988834371" class="btn btn-primary">1 DAY FREE TRIAL</a>
+            <a href="#plans" class="btn btn-outline">VIEW PLANS</a>
+        </div>
+    </section>
+
+    <section class="section reveal" id="facilities">
+        <h2 class="section-title">ELITE FACILITIES</h2>
+        <div class="facility-grid">
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format"
+                    alt="Strength">
+                <div class="facility-info">
+                    <h4>Powerful Strength Area</h4>
+                </div>
+            </div>
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=600&auto=format"
+                    alt="Deadlift">
+                <div class="facility-info">
+                    <h4>Dedicated Deadlift Zone</h4>
+                </div>
+            </div>
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format"
+                    alt="Cardio">
+                <div class="facility-info">
+                    <h4>Separate Cardio Floor</h4>
+                </div>
+            </div>
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=600&auto=format"
+                    alt="Trainers">
+                <div class="facility-info">
+                    <h4>Certified Trainers</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section reveal" id="trainers">
+        <h2 class="section-title">MEET OUR ELITE TRAINERS</h2>
+
+        <div class="trainer-grid">
+
+            <div class="trainer-card">
+                <div class="trainer-img">
+                    <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80"
+                        alt="Trainer 1">
+                </div>
+                <div class="trainer-info">
+                    <h3>Prince</h3>
+                    <p>Certified Strength & Conditioning Coach with 7+ years of experience. Specializes in muscle
+                        building, fat loss, and competition prep.</p>
+                </div>
+            </div>
+
+            <div class="trainer-card">
+                <div class="trainer-img">
+                    <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=80"
+                        alt="Trainer 2">
+                </div>
+                <div class="trainer-info">
+                    <h3>Jasmeet</h3>
+                    <p>Professional fitness trainer focused on transformation programs, endurance training, and
+                        personalized diet planning.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section reveal" id="gallery">
+        <h2 class="section-title">ELITE GALLERY</h2>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=800&q=80"
+                    alt="Gym Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=800&q=80"
+                    alt="Gym Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80"
+                    alt="Gym Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1571019613914-85f342c55f3c?auto=format&fit=crop&w=800&q=80"
+                    alt="Gym Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80"
+                    alt="Gym Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=80"
+                    alt="Gym Image">
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section reveal" id="plans" style="background: #080808;">
+        <h2 class="section-title">MEMBERSHIPS</h2>
+        <div class="grid-3">
+            <div class="price-card">
+                <h3>GYM ONLY</h3>
+                <div class="price">1700</div>
+                <p style="color: var(--text-gray); margin-bottom: 30px;">FULL STRENGTH + OPEN BALCONY</p>
+                <a href="#" class="btn btn-outline" style="width: 100%; margin: 0;">JOIN NOW</a>
+            </div>
+            <div class="price-card featured">
+                <div class="badge">🔥 BEST VALUE</div>
+                <h3>COMBO</h3>
+                <div class="price">2199</div>
+                <p style="color: var(--text-gray); margin-bottom: 30px;">FULL GYM + CARDIO + PRIORITY TRAINING</p>
+                <a href="#" class="btn btn-primary" style="width: 100%; margin: 0;">BECOME ELITE</a>
+            </div>
+
+            <div class="price-card">
+                <h3>CARDIO</h3>
+                <div class="price">1000</div>
+                <p style="color: var(--text-gray); margin-bottom: 30px;">DEDICATED FLOOR + AC</p>
+                <a href="#" class="btn btn-outline" style="width: 100%; margin: 0;">JOIN CARDIO</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="contact-grid reveal">
+            <div>
+                <h2 style="margin-bottom: 30px;">ELITE <span style="color: var(--neon-red);">FITNESS</span></h2>
+                <p style="color: var(--text-gray); margin-bottom: 20px;">Hisar Road, Near Maharana Partap
+                    Chowk<br>Sirsa, Haryana</p>
+                <p style="font-size: 1.5rem; font-weight: 800;">079888 34371</p>
+                <div style="margin-top: 20px;">
+                    <a href="https://www.instagram.com/elite_fitness_sirsa/" target="_blank"
+                        style="color: white; font-size: 1.5rem; transition: 0.3s;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+
+            </div>
+            <div style="background: #111; height: 300px; border: 1px solid var(--neon-red);">
+                <div
+                    style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; color: #333;">
+                    <iframe
+                        src="https://www.google.com/maps?q=Hisar+Road,+Near+Maharana+Pratap+Chowk,+Sirsa,+Haryana&output=embed"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 800);
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

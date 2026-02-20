@@ -356,8 +356,8 @@
         /* --- Gallery Section --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
 
         .gallery-item {
@@ -370,7 +370,7 @@
 
         .gallery-item img {
             width: 100%;
-            height: 250px;
+            height: 350px;
             object-fit: cover;
             transition: var(--transition);
         }
@@ -432,6 +432,18 @@
             font-size: 0.95rem;
             color: var(--text-gray);
         }
+
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -456,7 +468,7 @@
         <h1 class="reveal">UNLEASH YOUR<br><span style="color: var(--neon-red);">ELITE</span> VERSION</h1>
         <p class="reveal">Elite Fitness Sirsa – High-Performance Environment for Champions.</p>
         <div class="cta-group reveal">
-            <a href="tel:07988834371" class="btn btn-primary">1 DAY FREE TRIAL</a>
+            <a href="tel:07988834371" class="btn btn-primary">₹200 TRIAL PASS</a>
             <a href="#plans" class="btn btn-outline">VIEW PLANS</a>
         </div>
     </section>
@@ -501,8 +513,7 @@
 
             <div class="trainer-card">
                 <div class="trainer-img">
-                    <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80"
-                        alt="Trainer 1">
+                    <img src="IMG_3537.PNG" alt="Trainer 1">
                 </div>
                 <div class="trainer-info">
                     <h3>Prince</h3>
@@ -513,13 +524,35 @@
 
             <div class="trainer-card">
                 <div class="trainer-img">
-                    <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=80"
-                        alt="Trainer 2">
+                    <img src="IMG_3523.PNG" alt="Trainer 2">
                 </div>
                 <div class="trainer-info">
-                    <h3>Jasmeet</h3>
+                    <h3>Simran</h3>
+                    <p>Certified fitness & cardio specialist focused on fat-loss, endurance, and transformation coaching
+                        for all fitness levels.</p>
+                </div>
+            </div>
+            <!-- Trainer 3 -->
+            <div class="trainer-card">
+                <div class="trainer-img">
+                    <img src="IMG_3530.PNG" alt="Trainer 3">
+                </div>
+                <div class="trainer-info">
+                    <h3>jasmeet</h3>
+                    <p>Expert in powerlifting and advanced strength programming. Helps members break plateaus and build
+                        raw strength safely.</p>
+                </div>
+            </div>
+
+            <!-- Trainer 4 -->
+            <div class="trainer-card">
+                <div class="trainer-img">
+                    <img src="IMG_3525.PNG" alt="Trainer 4">
+                </div>
+                <div class="trainer-info">
+                    <h3>Karan</h3>
                     <p>Professional fitness trainer focused on transformation programs, endurance training, and
-                        personalized diet planning.</p>
+                        personalized diet planning</p>
                 </div>
             </div>
 
@@ -531,31 +564,27 @@
 
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=800&q=80"
-                    alt="Gym Image">
+                <img src="IMG_3538.PNG" alt="Gym Image">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=800&q=80"
-                    alt="Gym Image">
+                <img src="IMG_3539.PNG" alt="Gym Image">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80"
-                    alt="Gym Image">
+                <img src="IMG_3540.PNG" alt="Gym Image">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1571019613914-85f342c55f3c?auto=format&fit=crop&w=800&q=80"
-                    alt="Gym Image">
+                <img src="IMG_3541.PNG" alt="Gym Image">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80"
-                    alt="Gym Image">
+                <img src="IMG_3542.PNG" alt="Gym Image">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=80"
-                    alt="Gym Image">
+                <img src="IMG_3543.PNG" alt="Gym Image">
             </div>
         </div>
     </section>
+
+
 
 
     <section class="section reveal" id="plans" style="background: #080808;">
@@ -563,14 +592,14 @@
         <div class="grid-3">
             <div class="price-card">
                 <h3>GYM ONLY</h3>
-                <div class="price">1700</div>
+                <div class="price">1500</div>
                 <p style="color: var(--text-gray); margin-bottom: 30px;">FULL STRENGTH + OPEN BALCONY</p>
                 <a href="#" class="btn btn-outline" style="width: 100%; margin: 0;">JOIN NOW</a>
             </div>
             <div class="price-card featured">
                 <div class="badge">🔥 BEST VALUE</div>
                 <h3>COMBO</h3>
-                <div class="price">2199</div>
+                <div class="price">2000</div>
                 <p style="color: var(--text-gray); margin-bottom: 30px;">FULL GYM + CARDIO + PRIORITY TRAINING</p>
                 <a href="#" class="btn btn-primary" style="width: 100%; margin: 0;">BECOME ELITE</a>
             </div>
